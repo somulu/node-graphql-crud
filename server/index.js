@@ -1,5 +1,6 @@
-const express = require('express')
 require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
 const {graphqlHTTP} = require('express-graphql')
 const graphqlSchema = require('./graphql/graphqlSchema')
 const graphqlResolvers = require('./graphql/graphqlResolvers')
@@ -13,13 +14,15 @@ const port = process.env.PORT || 5000
 connectDB()
 
 // Middlewares
+app.use(cors())
 app.use(express.json())
 
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', graphqlHTTP((req, res)=>({
     schema: graphqlSchema, 
     rootValue: graphqlResolvers,
+    context: { req, res },
     graphiql: process.env.NODE_ENV === 'development'
-}))
+})))
 
 
 app.listen(port, () => {

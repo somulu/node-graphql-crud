@@ -1,7 +1,9 @@
 const UserSchema = require("../models/UserModels");
 
 const graphqlResolvers = {
-  getUser: async ({ id }) => {
+  getUser: async ({ id }, context) => {
+    const {req, res} = context
+    console.log("====== Req ", req.headers)
     try {
       const user = await UserSchema.findById(id);
       return user;
@@ -59,6 +61,7 @@ const graphqlResolvers = {
       );
       return user;
     } catch (err) {
+      console.log("==== Error ", err)
       throw new Error("Error in updating the user");
     }
   },
