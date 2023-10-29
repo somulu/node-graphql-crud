@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_USER } from '../graphql/userQueries'
 import { UPDATE_USER } from '../graphql/userMutations'
@@ -7,6 +7,7 @@ import Spinner from '../components/Spinner'
 
 const User = () => {
     const { userId } = useParams()
+    const navigate = useNavigate();
     const { loading, error, data } = useQuery(GET_USER, { variables: { id: userId } })
 
     const getUser = data ? data.getUser : {};
@@ -44,6 +45,12 @@ const User = () => {
                 contactNumber,
             },
         );
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+        setOrganizationName('')
+        setContactNumber('')
+        navigate("/");
     };
 
     if (loading) return <Spinner />
