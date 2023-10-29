@@ -7,4 +7,12 @@ query GetUsers {
     }
 }
 `
-export { GET_USERS }
+const GET_USER = gql`
+    query GetUser($id: ID!){
+        getUser(id:$id){
+            id, firstName, lastName, email, organizationName, contactNumber
+    }
+    }
+`
+
+export { GET_USERS, GET_USER }

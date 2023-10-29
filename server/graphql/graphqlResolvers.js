@@ -6,6 +6,7 @@ const graphqlResolvers = {
     console.log("====== Req ", req.headers)
     try {
       const user = await UserSchema.findById(id);
+      console.log("========= Server User", user)
       return user;
     } catch (error) {
       console.log(" Get User Error ", error);

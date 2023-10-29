@@ -15,4 +15,12 @@ const CREATE_USER = gql`
   }
 `;
 
-export { DELETE_USER, CREATE_USER }
+const UPDATE_USER = gql`
+  mutation updateUser($id:ID!, $firstName: String, $lastName: String, $email: String, $organizationName: String, $contactNumber: String) {
+    updateUser(id:$id, firstName: $firstName, lastName: $lastName, email: $email, organizationName: $organizationName, contactNumber: $contactNumber){
+        id, firstName, lastName, email, organizationName, contactNumber
+    }
+  }
+`;
+
+export { DELETE_USER, CREATE_USER, UPDATE_USER }

@@ -1,10 +1,12 @@
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
-import User from './components/User';
 import Header from './components/Header';
-import AddUserModal from './components/AddUserModal';
+import Home from './pages/Home'
+import NotFound from './pages/NotFound';
+import User from './pages/User';
 
-// If any warning in console related to caching
+// If any warning in console related to caching then add some policies on quries
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -35,11 +37,16 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Header />
-        <div className="container">
-          <AddUserModal />
-          <User />
-        </div>
+        <Router>
+          <Header />
+          <div className="container">
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/user/:userId' element={<User/>} />
+              <Route path='*' element={<NotFound/>} />
+            </Routes>
+          </div>
+        </Router>
       </ApolloProvider>
     </>
   );

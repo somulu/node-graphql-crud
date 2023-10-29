@@ -4,7 +4,7 @@ import { GET_USERS } from '../graphql/userQueries'
 import UserRow from './UserRow'
 import Spinner from './Spinner'
 
-function User() {
+function Users() {
   const { loading, error, data } = useQuery(GET_USERS)
 
   if (loading) return <Spinner/>
@@ -37,4 +37,4 @@ function User() {
   );
 }
 
-export default User;
+export default Users;

@@ -1,5 +1,6 @@
 import React from 'react'
-import { FaTrash } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { FaTrash, FaEdit } from 'react-icons/fa'
 import { useMutation } from '@apollo/client'
 import { DELETE_USER } from '../graphql/userMutations'
 import { GET_USERS } from '../graphql/userQueries'
@@ -27,9 +28,15 @@ const UserRow = ({ user }) => {
       <td>{organizationName}</td>
       <td>{contactNumber}</td>
       <td>
+        <Link to={`/user/${user.id}`}>
+          <button className='btn btn-danger btn-sm' style={{ marginRight: "5px" }} >
+            <FaEdit />
+          </button>
+        </Link>
         <button className='btn btn-danger btn-sm' onClick={deleteUser} >
           <FaTrash />
         </button>
+
       </td>
     </tr>
   )
